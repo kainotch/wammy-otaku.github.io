@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Features | Wammy Docs</title>
+    <meta name="description" content="Upcoming features and updates planned for Wammy.">
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/jpeg" href="/assets/wammy-logo.jpg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #000000; --bg-card: #111111; --text: #ffffff;
+            --text-secondary: #a0a0a0; --text-muted: #666666;
+            --accent: #3b82f6; --border: #1e1e1e;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .layout { display: flex; min-height: 100vh; }
+        .sidebar { width: 260px; position: fixed; top: 0; left: 0; height: 100vh; border-right: 1px solid var(--border); padding: 24px; background: var(--bg); }
+        .sidebar-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-weight: 700; font-size: 18px; margin-bottom: 32px; }
+        .sidebar-brand img { width: 28px; height: 28px; border-radius: 8px; }
+        .sidebar-section { margin-bottom: 24px; }
+        .sidebar-section h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 12px; font-weight: 600; }
+        .sidebar-section a { display: block; padding: 8px 12px; color: var(--text-secondary); text-decoration: none; font-size: 14px; border-radius: 8px; transition: all 0.2s; margin-bottom: 2px; }
+        .sidebar-section a:hover { color: var(--text); background: var(--bg-card); }
+        .sidebar-section a.active { color: var(--accent); background: rgba(59, 130, 246, 0.1); }
+        .main { margin-left: 260px; flex: 1; padding: 48px 64px; max-width: 860px; }
+        .breadcrumb { display: flex; gap: 8px; color: var(--text-muted); font-size: 13px; margin-bottom: 32px; }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--accent); }
+        .main h1 { font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+        .main .subtitle { color: var(--text-secondary); font-size: 18px; margin-bottom: 48px; }
+        .main h2 { font-size: 24px; font-weight: 700; margin-top: 48px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+        .main p { color: var(--text-secondary); margin-bottom: 16px; font-size: 15px; }
+        .main ul { color: var(--text-secondary); margin-bottom: 16px; padding-left: 24px; font-size: 15px; }
+        .main li { margin-bottom: 8px; }
+        .callout { border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; border-left: 4px solid; background: rgba(59, 130, 246, 0.08); border-color: var(--accent); }
+        .callout-title { font-weight: 600; font-size: 14px; margin-bottom: 8px; }
+        .callout p { margin-bottom: 0; font-size: 14px; }
+        @media (max-width: 768px) { .sidebar { display: none; } .main { margin-left: 0; padding: 24px; } }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <a href="/" class="sidebar-brand"><img src="/assets/wammy-logo.jpg" alt="Wammy"> Wammy</a>
+            <div class="sidebar-section"><h4>Getting Started</h4><a href="/docs/guides/troubleshooting/">Installation</a></div>
+            <div class="sidebar-section"><h4>Guides</h4><a href="/docs/guides/troubleshooting/">Troubleshooting</a></div>
+            <div class="sidebar-section"><h4>FAQ</h4><a href="/docs/faq/updates/upcoming/" class="active">Upcoming Features</a></div>
+            <div class="sidebar-section"><h4>Links</h4><a href="https://github.com/wammy-otaku/wammy" target="_blank">GitHub</a><a href="https://discord.gg/yWgrg3Ep8G" target="_blank">Discord</a><a href="/">Home</a></div>
+        </aside>
+        <main class="main">
+            <div class="breadcrumb"><a href="/">Home</a> / <a href="/docs/faq/updates/upcoming/">FAQ</a> / <span>Upcoming</span></div>
+            <h1>Upcoming Features</h1>
+            <p class="subtitle">What's coming next for Wammy</p>
+
+            <h2>🔜 Planned Features</h2>
+            <ul>
+                <li><strong>Top 5 Favorite Manga</strong> — Showcase your favorite manga on your profile page</li>
+                <li><strong>Reading Statistics</strong> — Track how many chapters and novels you've read</li>
+                <li><strong>Custom Themes</strong> — Create and share custom color themes</li>
+                <li><strong>Cloud Sync</strong> — Sync your library across devices</li>
+                <li><strong>Social Features</strong> — Share your reading lists with friends</li>
+            </ul>
+
+            <h2>🔄 Recently Added</h2>
+            <ul>
+                <li><strong>Google Sign-In</strong> — Personalized experience with your Google account</li>
+                <li><strong>Custom Profile Pictures</strong> — Pick photos from your gallery</li>
+                <li><strong>Dynamic Instagram Profiles</strong> — Live profile pictures on the About screen</li>
+                <li><strong>Pill-Style Navigation</strong> — Modern rounded tab design in Browse</li>
+                <li><strong>Custom App Branding</strong> — Unique splash screen and logo</li>
+            </ul>
+
+            <div class="callout">
+                <div class="callout-title">💡 Have a Feature Request?</div>
+                <p>Join our <a href="https://discord.gg/yWgrg3Ep8G" style="color: var(--accent);" target="_blank">Discord</a> or open an issue on <a href="https://github.com/wammy-otaku/wammy/issues" style="color: var(--accent);" target="_blank">GitHub</a> to suggest new features!</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

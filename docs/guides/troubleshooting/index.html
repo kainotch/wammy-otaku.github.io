@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshooting | Wammy Docs</title>
+    <meta name="description" content="Facing source or app issues with Wammy? Here's how to troubleshoot.">
+    <meta name="theme-color" content="#000000">
+    <meta property="og:title" content="Troubleshooting — Wammy Docs">
+    <meta property="og:description" content="Facing source or app issues? Here's how to troubleshoot.">
+    <meta property="og:image" content="https://wammy-otaku.github.io/assets/wammy-logo.jpg">
+    <link rel="icon" type="image/jpeg" href="/assets/wammy-logo.jpg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #000000;
+            --bg-card: #111111;
+            --bg-card-hover: #1a1a1a;
+            --text: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --accent: #3b82f6;
+            --border: #1e1e1e;
+            --code-bg: #0d0d0d;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Sidebar + Content Layout */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            border-right: 1px solid var(--border);
+            padding: 24px;
+            overflow-y: auto;
+            background: var(--bg);
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+
+        .sidebar-brand img {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 24px;
+        }
+
+        .sidebar-section h4 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .sidebar-section a {
+            display: block;
+            padding: 8px 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            margin-bottom: 2px;
+        }
+
+        .sidebar-section a:hover {
+            color: var(--text);
+            background: var(--bg-card);
+        }
+
+        .sidebar-section a.active {
+            color: var(--accent);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        /* Main content */
+        .main {
+            margin-left: 260px;
+            flex: 1;
+            padding: 48px 64px;
+            max-width: 860px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 32px;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent);
+        }
+
+        .main h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+
+        .main .subtitle {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 48px;
+        }
+
+        .main h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 48px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .main h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 32px;
+            margin-bottom: 12px;
+        }
+
+        .main p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .main ol, .main ul {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding-left: 24px;
+            font-size: 15px;
+        }
+
+        .main li {
+            margin-bottom: 8px;
+        }
+
+        .main code {
+            background: var(--code-bg);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #e5c07b;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .main pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+        }
+
+        .main pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Callout boxes */
+        .callout {
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            border-left: 4px solid;
+        }
+
+        .callout-info {
+            background: rgba(59, 130, 246, 0.08);
+            border-color: var(--accent);
+        }
+
+        .callout-warning {
+            background: rgba(245, 158, 11, 0.08);
+            border-color: #f59e0b;
+        }
+
+        .callout-danger {
+            background: rgba(239, 68, 68, 0.08);
+            border-color: #ef4444;
+        }
+
+        .callout-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .callout p {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main {
+                margin-left: 0;
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="/" class="sidebar-brand">
+                <img src="/assets/wammy-logo.jpg" alt="Wammy">
+                Wammy
+            </a>
+
+            <div class="sidebar-section">
+                <h4>Getting Started</h4>
+                <a href="/docs/guides/troubleshooting/">Installation</a>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>Guides</h4>
+                <a href="/docs/guides/troubleshooting/" class="active">Troubleshooting</a>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>FAQ</h4>
+                <a href="/docs/faq/updates/upcoming/">Upcoming Features</a>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>Links</h4>
+                <a href="https://github.com/wammy-otaku/wammy" target="_blank">GitHub</a>
+                <a href="https://discord.gg/yWgrg3Ep8G" target="_blank">Discord</a>
+                <a href="/">Home</a>
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <main class="main">
+            <div class="breadcrumb">
+                <a href="/">Home</a> / <a href="/docs/guides/troubleshooting/">Guides</a> / <span>Troubleshooting</span>
+            </div>
+
+            <h1>Troubleshooting</h1>
+            <p class="subtitle">Facing source or app issues? Here's how to fix them.</p>
+
+            <h2>🔧 App Won't Open / Crashes on Launch</h2>
+
+            <h3>Clear App Data</h3>
+            <p>If the app crashes on launch, try clearing the app data:</p>
+            <ol>
+                <li>Go to your device's <strong>Settings</strong> → <strong>Apps</strong> → <strong>Wammy</strong></li>
+                <li>Tap <strong>Storage</strong></li>
+                <li>Tap <strong>Clear Data</strong></li>
+                <li>Reopen Wammy</li>
+            </ol>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ Warning</div>
+                <p>Clearing data will remove your library, reading progress, and settings. Make sure you have a backup first!</p>
+            </div>
+
+            <h3>Reinstall the App</h3>
+            <p>If clearing data doesn't help, uninstall and reinstall Wammy from the latest release on <a href="https://github.com/wammy-otaku/wammy/releases" style="color: var(--accent);">GitHub</a>.</p>
+
+            <h2>📚 Sources Not Loading</h2>
+
+            <h3>Update Extensions</h3>
+            <p>Sources may break when websites change their structure. Try updating your extensions:</p>
+            <ol>
+                <li>Go to <strong>Browse</strong> → <strong>Extensions</strong> (or <strong>Novel Extensions</strong>)</li>
+                <li>Look for extensions with an <strong>Update</strong> badge</li>
+                <li>Tap <strong>Update</strong> on each one</li>
+            </ol>
+
+            <h3>Clear Source Cache</h3>
+            <p>Sometimes cached data from a source can become corrupted:</p>
+            <ol>
+                <li>Go to <strong>Browse</strong> → <strong>Sources</strong></li>
+                <li>Long-press the source that isn't working</li>
+                <li>Select <strong>Clear cookies</strong></li>
+            </ol>
+
+            <h3>Check Your Internet Connection</h3>
+            <p>Make sure you have a stable internet connection. Some sources may also be blocked by your ISP — try using a VPN.</p>
+
+            <h2>📥 Downloads Not Working</h2>
+
+            <h3>Check Storage Permission</h3>
+            <p>Wammy needs storage access to download chapters. Go to <strong>Settings</strong> → <strong>Apps</strong> → <strong>Wammy</strong> → <strong>Permissions</strong> and make sure storage is allowed.</p>
+
+            <h3>Free Up Storage Space</h3>
+            <p>If your device is running low on storage, downloads may fail silently. Check your available storage and free up space if needed.</p>
+
+            <h2>🔄 Tracking Not Syncing</h2>
+
+            <h3>Re-login to Tracker</h3>
+            <p>If your tracker suddenly stops syncing:</p>
+            <ol>
+                <li>Go to <strong>More</strong> → <strong>Settings</strong> → <strong>Tracking</strong></li>
+                <li>Log out from the tracker service</li>
+                <li>Log back in</li>
+            </ol>
+
+            <h2>🆘 Still Need Help?</h2>
+
+            <p>If none of the above solutions work, reach out to us:</p>
+            <ul>
+                <li>Join our <a href="https://discord.gg/yWgrg3Ep8G" style="color: var(--accent);" target="_blank">Discord Server</a> and ask in the support channel</li>
+                <li>File a bug report on <a href="https://github.com/wammy-otaku/wammy/issues" style="color: var(--accent);" target="_blank">GitHub Issues</a></li>
+            </ul>
+
+            <div class="callout callout-info">
+                <div class="callout-title">💡 Tip</div>
+                <p>When reporting an issue, include your Wammy version (found in <strong>More</strong> → <strong>About</strong>) and a description of the problem with steps to reproduce it.</p>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
