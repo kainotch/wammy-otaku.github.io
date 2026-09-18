@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Wammy ?" Manga & Novel Reader</title>
+    <meta name="description" content="Download Wammy APK for Android.">
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/jpeg" href="assets/wammy-logo.jpg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #000000; --bg-secondary: #0a0a0a; --bg-card: #111111; --bg-card-hover: #1a1a1a;
+            --text-primary: #ffffff; --text-secondary: #a0a0a0; --accent: #3b82f6; --accent-hover: #2563eb;
+            --border: #1e1e1e;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+        
+        nav { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-brand img { width: 32px; height: 32px; border-radius: 8px; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: white; }
+        .nav-cta { background: white; color: black !important; padding: 0.5rem 1rem; border-radius: 100px; font-weight: 600 !important; }
+        .nav-cta:hover { background: #e5e5e5; }
+        
+        .hero { padding: 10rem 2rem 5rem; text-align: center; max-width: 800px; margin: 0 auto; }
+        h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+        p { color: var(--text-secondary); font-size: 1.125rem; max-width: 600px; margin: 0 auto 3rem; }
+        
+        .download-grid { display: flex; flex-direction: column; gap: 1rem; max-width: 600px; margin: 0 auto; }
+        .download-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; text-decoration: none; color: var(--text-primary); }
+        .download-card:hover { background: var(--bg-card-hover); border-color: #333; transform: translateY(-2px); }
+        
+        .dl-info { text-align: left; }
+        .dl-title { font-weight: 700; font-size: 1.125rem; margin-bottom: 0.25rem; }
+        .dl-desc { color: var(--text-secondary); font-size: 0.875rem; }
+        
+        .dl-btn { background: var(--accent); color: white; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem; }
+        .download-card:hover .dl-btn { background: var(--accent-hover); }
+        
+        .dl-recommended { border-color: var(--accent); background: rgba(59, 130, 246, 0.05); }
+        .dl-recommended:hover { border-color: var(--accent); background: rgba(59, 130, 246, 0.1); }
+        .badge { background: var(--accent); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; margin-left: 0.5rem; vertical-align: middle; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <img src="assets/wammy-logo.jpg" alt="Wammy">
+                Wammy
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="docs/guides/troubleshooting/">Docs</a></li>
+                <li><a href="https://github.com/kainotch/Wammy">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Download Wammy</h1>
+        <p>Select the APK version that matches your Android device's architecture. If you're unsure, download the Universal APK.</p>
+        
+        <div class="download-grid">
+            <a href="https://github.com/kainotch/Wammy/releases/download/v0.0.1/app-universal-release.apk" class="download-card dl-recommended">
+                <div class="dl-info">
+                    <div class="dl-title">Universal APK <span class="badge">RECOMMENDED</span></div>
+                    <div class="dl-desc">Works on all Android devices. (Larger file size)</div>
+                </div>
+                <div class="dl-btn"> Download</div>
+            </a>
+            
+            <a href="https://github.com/kainotch/Wammy/releases/download/v0.0.1/app-arm64-v8a-release.apk" class="download-card">
+                <div class="dl-info">
+                    <div class="dl-title">ARM64 (v8a)</div>
+                    <div class="dl-desc">For most modern 64-bit Android devices.</div>
+                </div>
+                <div class="dl-btn"> Download</div>
+            </a>
+            
+            <a href="https://github.com/kainotch/Wammy/releases/download/v0.0.1/app-armeabi-v7a-release.apk" class="download-card">
+                <div class="dl-info">
+                    <div class="dl-title">ARM32 (v7a)</div>
+                    <div class="dl-desc">For older 32-bit Android devices.</div>
+                </div>
+                <div class="dl-btn"> Download</div>
+            </a>
+            
+            <a href="https://github.com/kainotch/Wammy/releases/download/v0.0.1/app-x86_64-release.apk" class="download-card">
+                <div class="dl-info">
+                    <div class="dl-title">x86_64</div>
+                    <div class="dl-desc">For 64-bit Android emulators.</div>
+                </div>
+                <div class="dl-btn"> Download</div>
+            </a>
+            
+            <a href="https://github.com/kainotch/Wammy/releases/download/v0.0.1/app-x86-release.apk" class="download-card">
+                <div class="dl-info">
+                    <div class="dl-title">x86</div>
+                    <div class="dl-desc">For 32-bit Android emulators.</div>
+                </div>
+                <div class="dl-btn"> Download</div>
+            </a>
+        </div>
+    </section>
+</body>
+</html>
