@@ -433,7 +433,7 @@
     <section class="hero">
         <div class="hero-content">
             <img src="assets/wammy-logo.jpg" alt="Wammy Logo" class="hero-logo">
-            <div class="hero-badge">✨ v0.0.2 — Free & Open Source</div>
+            <div class="hero-badge" id="version-badge">✨ Loading... — Free & Open Source</div>
             <h1>Read <span>Manga</span> & <span>Novels</span></h1>
             <p>A beautifully crafted, free manga and light novel reader for Android. One app, endless stories.</p>
             <div class="hero-buttons">
@@ -524,6 +524,21 @@
             <p class="footer-copy">© 2026 Wammy. Built with ❤️ by kainotch.</p>
         </div>
     </footer>
+
+<script>
+    fetch('https://api.github.com/repos/kainotch/Wammy/releases/latest')
+        .then(r => r.json())
+        .then(data => {
+            const badge = document.getElementById('version-badge');
+            if (badge && data.tag_name) {
+                badge.textContent = '✨ ' + data.tag_name + ' — Free & Open Source';
+            }
+        })
+        .catch(() => {
+            const badge = document.getElementById('version-badge');
+            if (badge) badge.textContent = '✨ Free & Open Source';
+        });
+</script>
 
 </body>
 </html>
