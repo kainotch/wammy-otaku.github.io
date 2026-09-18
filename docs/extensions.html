@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Extensions & Plugins — Wammy</title>
+    <link rel='icon' type='image/jpeg' href='../assets/wammy-logo.jpg'>
+    <link rel='stylesheet' href='../assets/style.css'>
+</head>
+<body>
+        <!-- Top Nav -->
+    <nav class='top-nav'>
+        <div class='nav-container'>
+            <a href='../index.html' class='nav-brand'>
+                <img src='../assets/wammy-logo.jpg' alt='Wammy'>
+                <span>Wammy</span>
+            </a>
+            <div class='nav-links'>
+                <a href='../download.html' class='nav-link nav-version-btn'>Get <span class='nav-version'>latest</span></a>
+                <a href='../docs/' class='nav-link'>Docs</a>
+                <a href='https://github.com/kainotch/Wammy' class='nav-link' target='_blank'>GitHub</a>
+            </div>
+        </div>
+    </nav>
+    <div class='docs-layout'>
+            <!-- Left Sidebar -->
+    <aside class='sidebar'>
+        <div class='sidebar-section'>
+            <a href='../download.html' class='sidebar-link '>Download</a>
+            <a href='https://github.com/kainotch/Wammy/releases' class='sidebar-link' target='_blank'>Changelogs</a>
+        </div>
+        <div class='sidebar-section'>
+            <div class='sidebar-section-title'>FAQ</div>
+            <a href='../docs/faq.html' class='sidebar-link '>General</a>
+        </div>
+        <div class='sidebar-section'>
+            <div class='sidebar-section-title'>Guides</div>
+            <a href='../docs/getting-started.html' class='sidebar-link '>Getting started</a>
+            <a href='../docs/extensions.html' class='sidebar-link active'>Extensions & Plugins</a>
+            <a href='../docs/tracking.html' class='sidebar-link '>Tracking</a>
+            <a href='../docs/reader-settings.html' class='sidebar-link '>Reader settings</a>
+            <a href='../docs/local-source.html' class='sidebar-link '>Local source</a>
+        </div>
+    </aside>
+        <main class='docs-content'>
+            <h1>Extensions & Plugins</h1>
+<p class='subtitle'>Bring your own content to Wammy.</p>
+<h2 id='what'>What are extensions?</h2>
+<p>Extensions are add-ons that let you access manga and novel sources. They provide content from various websites and services and are installed as separate APK files on your device.</p>
+<h2 id='installing'>Installing extensions</h2>
+<ol>
+    <li>Open the <strong>Browse</strong> tab in Wammy</li>
+    <li>Tap the <strong>Extensions</strong> tab</li>
+    <li>Find the extension you want</li>
+    <li>Tap <strong>Install</strong></li>
+</ol>
+<h2 id='repos'>External repositories</h2>
+<p>You can add third-party extension repositories to get more sources.</p>
+<p>Go to <strong>More > Settings > Browse > Extension repos</strong> and add the repository URL.</p>
+<h2 id='plugins'>JS Plugins</h2>
+<p>Wammy also supports JavaScript-based plugins for additional sources. These are lightweight alternatives to full APK extensions.</p>
+<h2 id='managing'>Managing extensions</h2>
+<p>Make sure to update extensions when new versions are available. You can uninstall extensions you no longer need to save space.</p>
+        </main>
+        <aside class='toc'>
+    <div class='toc-title'>On this page</div>
+    <a href='#what' class='toc-link'>What are extensions?</a>
+    <a href='#installing' class='toc-link'>Installing</a>
+    <a href='#repos' class='toc-link'>External repos</a>
+    <a href='#plugins' class='toc-link'>JS Plugins</a>
+    <a href='#managing' class='toc-link'>Managing</a>
+</aside>
+    </div>
+        <script>
+        fetch('https://api.github.com/repos/kainotch/Wammy/releases/latest')
+            .then(r => r.json())
+            .then(data => {
+                document.querySelectorAll('.nav-version').forEach(el => {
+                    if (data.tag_name) el.textContent = data.tag_name;
+                });
+                
+                const relName = document.getElementById('release-name');
+                const relDate = document.getElementById('release-date');
+                if (relName && data.tag_name) relName.textContent = 'Wammy ' + data.tag_name;
+                if (relDate && data.published_at) {
+                    const d = new Date(data.published_at);
+                    relDate.textContent = 'Released ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                }
+
+                const changelogVersion = document.getElementById('changelog-version');
+                const changelogBody = document.getElementById('changelog-body');
+                if (changelogVersion && data.tag_name) changelogVersion.textContent = data.tag_name;
+                if (changelogBody && data.body) {
+                    let html = data.body.replace(/\r\n/g, '<br>');
+                    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+                    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+                    html = html.replace(/^\* (.*$)/gim, '<ul><li>$1</li></ul>');
+                    html = html.replace(/<\/ul><br><ul>/gim, '<br>');
+                    changelogBody.innerHTML = html;
+                }
+            })
+            .catch(() => {});
+    </script>
+</body>
+</html>

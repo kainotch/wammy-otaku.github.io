@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Tracking — Wammy</title>
+    <link rel='icon' type='image/jpeg' href='../assets/wammy-logo.jpg'>
+    <link rel='stylesheet' href='../assets/style.css'>
+</head>
+<body>
+        <!-- Top Nav -->
+    <nav class='top-nav'>
+        <div class='nav-container'>
+            <a href='../index.html' class='nav-brand'>
+                <img src='../assets/wammy-logo.jpg' alt='Wammy'>
+                <span>Wammy</span>
+            </a>
+            <div class='nav-links'>
+                <a href='../download.html' class='nav-link nav-version-btn'>Get <span class='nav-version'>latest</span></a>
+                <a href='../docs/' class='nav-link'>Docs</a>
+                <a href='https://github.com/kainotch/Wammy' class='nav-link' target='_blank'>GitHub</a>
+            </div>
+        </div>
+    </nav>
+    <div class='docs-layout'>
+            <!-- Left Sidebar -->
+    <aside class='sidebar'>
+        <div class='sidebar-section'>
+            <a href='../download.html' class='sidebar-link '>Download</a>
+            <a href='https://github.com/kainotch/Wammy/releases' class='sidebar-link' target='_blank'>Changelogs</a>
+        </div>
+        <div class='sidebar-section'>
+            <div class='sidebar-section-title'>FAQ</div>
+            <a href='../docs/faq.html' class='sidebar-link '>General</a>
+        </div>
+        <div class='sidebar-section'>
+            <div class='sidebar-section-title'>Guides</div>
+            <a href='../docs/getting-started.html' class='sidebar-link '>Getting started</a>
+            <a href='../docs/extensions.html' class='sidebar-link '>Extensions & Plugins</a>
+            <a href='../docs/tracking.html' class='sidebar-link active'>Tracking</a>
+            <a href='../docs/reader-settings.html' class='sidebar-link '>Reader settings</a>
+            <a href='../docs/local-source.html' class='sidebar-link '>Local source</a>
+        </div>
+    </aside>
+        <main class='docs-content'>
+            <h1>Tracking</h1>
+<p class='subtitle'>Automatically sync your reading progress with external services.</p>
+<h2 id='supported'>Supported Services</h2>
+<ul>
+    <li><strong>MyAnimeList (MAL)</strong></li>
+    <li><strong>AniList</strong></li>
+    <li><strong>Kitsu</strong></li>
+    <li><strong>MangaUpdates</strong></li>
+    <li><strong>Shikimori</strong></li>
+    <li><strong>Bangumi</strong></li>
+</ul>
+<h2 id='setup'>Setting up tracking</h2>
+<ol>
+    <li>Go to <strong>More > Settings > Tracking</strong></li>
+    <li>Tap on the service you want to use</li>
+    <li>Log in with your credentials</li>
+    <li>Once connected, the service will appear as available</li>
+</ol>
+<h2 id='using'>Using tracking</h2>
+<ol>
+    <li>Open a series in your library</li>
+    <li>Tap the <strong>Tracking</strong> icon</li>
+    <li>Search for the series on the tracking service</li>
+    <li>Select the correct match</li>
+    <li>Your progress will now sync automatically!</li>
+</ol>
+<h2 id='how-it-works'>How sync works</h2>
+<p>Syncing is <strong>one-way</strong> (Wammy &rarr; Tracker). When you read a chapter, Wammy automatically updates your tracker in the background. If the tracker is temporarily offline, Wammy will retry later.</p>
+<div class='info-box tip'>
+    <strong>Self-hosted services</strong><br>
+    Wammy also supports two-way sync with self-hosted services like Komga, Kavita, and Suwayomi.
+</div>
+        </main>
+        <aside class='toc'>
+    <div class='toc-title'>On this page</div>
+    <a href='#supported' class='toc-link'>Supported Services</a>
+    <a href='#setup' class='toc-link'>Setting up</a>
+    <a href='#using' class='toc-link'>Using tracking</a>
+    <a href='#how-it-works' class='toc-link'>How it works</a>
+</aside>
+    </div>
+        <script>
+        fetch('https://api.github.com/repos/kainotch/Wammy/releases/latest')
+            .then(r => r.json())
+            .then(data => {
+                document.querySelectorAll('.nav-version').forEach(el => {
+                    if (data.tag_name) el.textContent = data.tag_name;
+                });
+                
+                const relName = document.getElementById('release-name');
+                const relDate = document.getElementById('release-date');
+                if (relName && data.tag_name) relName.textContent = 'Wammy ' + data.tag_name;
+                if (relDate && data.published_at) {
+                    const d = new Date(data.published_at);
+                    relDate.textContent = 'Released ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                }
+
+                const changelogVersion = document.getElementById('changelog-version');
+                const changelogBody = document.getElementById('changelog-body');
+                if (changelogVersion && data.tag_name) changelogVersion.textContent = data.tag_name;
+                if (changelogBody && data.body) {
+                    let html = data.body.replace(/\r\n/g, '<br>');
+                    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+                    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+                    html = html.replace(/^\* (.*$)/gim, '<ul><li>$1</li></ul>');
+                    html = html.replace(/<\/ul><br><ul>/gim, '<br>');
+                    changelogBody.innerHTML = html;
+                }
+            })
+            .catch(() => {});
+    </script>
+</body>
+</html>

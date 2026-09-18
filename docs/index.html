@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Documentation — Wammy</title>
+    <link rel='icon' type='image/jpeg' href='../assets/wammy-logo.jpg'>
+    <link rel='stylesheet' href='../assets/style.css'>
+</head>
+<body>
+        <!-- Top Nav -->
+    <nav class='top-nav'>
+        <div class='nav-container'>
+            <a href='../index.html' class='nav-brand'>
+                <img src='../assets/wammy-logo.jpg' alt='Wammy'>
+                <span>Wammy</span>
+            </a>
+            <div class='nav-links'>
+                <a href='../download.html' class='nav-link nav-version-btn'>Get <span class='nav-version'>latest</span></a>
+                <a href='../docs/' class='nav-link'>Docs</a>
+                <a href='https://github.com/kainotch/Wammy' class='nav-link' target='_blank'>GitHub</a>
+            </div>
+        </div>
+    </nav>
+    <div class='docs-layout'>
+            <!-- Left Sidebar -->
+    <aside class='sidebar'>
+        <div class='sidebar-section'>
+            <a href='../download.html' class='sidebar-link '>Download</a>
+            <a href='https://github.com/kainotch/Wammy/releases' class='sidebar-link' target='_blank'>Changelogs</a>
+        </div>
+        <div class='sidebar-section'>
+            <div class='sidebar-section-title'>FAQ</div>
+            <a href='../docs/faq.html' class='sidebar-link '>General</a>
+        </div>
+        <div class='sidebar-section'>
+            <div class='sidebar-section-title'>Guides</div>
+            <a href='../docs/getting-started.html' class='sidebar-link '>Getting started</a>
+            <a href='../docs/extensions.html' class='sidebar-link '>Extensions & Plugins</a>
+            <a href='../docs/tracking.html' class='sidebar-link '>Tracking</a>
+            <a href='../docs/reader-settings.html' class='sidebar-link '>Reader settings</a>
+            <a href='../docs/local-source.html' class='sidebar-link '>Local source</a>
+        </div>
+    </aside>
+        <main class='docs-content'>
+            <h1>Documentation</h1>
+<p class='subtitle'>Everything you need to get started with Wammy.</p>
+<div class='features-grid' style='margin-top: 40px; margin-left: -48px;'>
+    <a href='getting-started.html' class='feature-card' style='text-decoration: none;'>
+        <h3>Getting Started</h3>
+        <p>Essential info to get set up with Wammy.</p>
+    </a>
+    <a href='extensions.html' class='feature-card' style='text-decoration: none;'>
+        <h3>Extensions & Plugins</h3>
+        <p>Install sources to access manga and novels.</p>
+    </a>
+    <a href='reader-settings.html' class='feature-card' style='text-decoration: none;'>
+        <h3>Reader Settings</h3>
+        <p>Customize your reading experience.</p>
+    </a>
+    <a href='tracking.html' class='feature-card' style='text-decoration: none;'>
+        <h3>Tracking</h3>
+        <p>Sync progress with MAL, AniList, and more.</p>
+    </a>
+    <a href='local-source.html' class='feature-card' style='text-decoration: none;'>
+        <h3>Local Source</h3>
+        <p>Read local files from your device.</p>
+    </a>
+    <a href='faq.html' class='feature-card' style='text-decoration: none;'>
+        <h3>FAQ</h3>
+        <p>Frequently asked questions.</p>
+    </a>
+</div>
+        </main>
+        
+    </div>
+        <script>
+        fetch('https://api.github.com/repos/kainotch/Wammy/releases/latest')
+            .then(r => r.json())
+            .then(data => {
+                document.querySelectorAll('.nav-version').forEach(el => {
+                    if (data.tag_name) el.textContent = data.tag_name;
+                });
+                
+                const relName = document.getElementById('release-name');
+                const relDate = document.getElementById('release-date');
+                if (relName && data.tag_name) relName.textContent = 'Wammy ' + data.tag_name;
+                if (relDate && data.published_at) {
+                    const d = new Date(data.published_at);
+                    relDate.textContent = 'Released ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                }
+
+                const changelogVersion = document.getElementById('changelog-version');
+                const changelogBody = document.getElementById('changelog-body');
+                if (changelogVersion && data.tag_name) changelogVersion.textContent = data.tag_name;
+                if (changelogBody && data.body) {
+                    let html = data.body.replace(/\r\n/g, '<br>');
+                    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+                    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+                    html = html.replace(/^\* (.*$)/gim, '<ul><li>$1</li></ul>');
+                    html = html.replace(/<\/ul><br><ul>/gim, '<br>');
+                    changelogBody.innerHTML = html;
+                }
+            })
+            .catch(() => {});
+    </script>
+</body>
+</html>

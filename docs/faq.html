@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>FAQ — Wammy</title>
+    <link rel='icon' type='image/jpeg' href='../assets/wammy-logo.jpg'>
+    <link rel='stylesheet' href='../assets/style.css'>
+</head>
+<body>
+        <!-- Top Nav -->
+    <nav class='top-nav'>
+        <div class='nav-container'>
+            <a href='../index.html' class='nav-brand'>
+                <img src='../assets/wammy-logo.jpg' alt='Wammy'>
+                <span>Wammy</span>
+            </a>
+            <div class='nav-links'>
+                <a href='../download.html' class='nav-link nav-version-btn'>Get <span class='nav-version'>latest</span></a>
+                <a href='../docs/' class='nav-link'>Docs</a>
+                <a href='https://github.com/kainotch/Wammy' class='nav-link' target='_blank'>GitHub</a>
+            </div>
+        </div>
+    </nav>
+    <div class='docs-layout'>
+            <!-- Left Sidebar -->
+    <aside class='sidebar'>
+        <div class='sidebar-section'>
+            <a href='../download.html' class='sidebar-link '>Download</a>
+            <a href='https://github.com/kainotch/Wammy/releases' class='sidebar-link' target='_blank'>Changelogs</a>
+        </div>
+        <div class='sidebar-section'>
+            <div class='sidebar-section-title'>FAQ</div>
+            <a href='../docs/faq.html' class='sidebar-link active'>General</a>
+        </div>
+        <div class='sidebar-section'>
+            <div class='sidebar-section-title'>Guides</div>
+            <a href='../docs/getting-started.html' class='sidebar-link '>Getting started</a>
+            <a href='../docs/extensions.html' class='sidebar-link '>Extensions & Plugins</a>
+            <a href='../docs/tracking.html' class='sidebar-link '>Tracking</a>
+            <a href='../docs/reader-settings.html' class='sidebar-link '>Reader settings</a>
+            <a href='../docs/local-source.html' class='sidebar-link '>Local source</a>
+        </div>
+    </aside>
+        <main class='docs-content'>
+            <h1>Frequently Asked Questions</h1>
+<p class='subtitle'>Common questions and troubleshooting.</p>
+<h2 id='general'>General</h2>
+<h3 id='what-is-wammy'>What is Wammy?</h3>
+<p>Wammy is a free, open-source manga and light novel reader for Android. It offers a clean, feature-rich reading experience.</p>
+<h3 id='ios'>Is Wammy available on iOS?</h3>
+<p>No, Wammy is only available on Android devices.</p>
+<h3 id='android'>What Android version do I need?</h3>
+<p>Wammy requires Android 8.0 (Oreo) or higher.</p>
+<h3 id='free'>Is Wammy free?</h3>
+<p>Yes, Wammy is completely free and open source. There are no ads, no subscriptions, and no in-app purchases.</p>
+<h2 id='library'>Library</h2>
+<h3 id='add-series'>How do I add series to my library?</h3>
+<p>Browse a source, find a series you like, and tap <strong>Add to Library</strong>.</p>
+<h2 id='updates'>Updates</h2>
+<h3 id='app-updates'>How do I check for app updates?</h3>
+<p>Wammy has a built-in updater that automatically checks for new versions. You can also manually check in <strong>More > About</strong>.</p>
+<h2 id='downloads'>Downloads</h2>
+<h3 id='storage'>Where are downloaded chapters stored?</h3>
+<p>Downloaded chapters are stored in the Wammy folder on your device's internal storage. You can change this in <strong>More > Settings > Downloads</strong>.</p>
+        </main>
+        <aside class='toc'>
+    <div class='toc-title'>On this page</div>
+    <a href='#general' class='toc-link'>General</a>
+    <a href='#library' class='toc-link'>Library</a>
+    <a href='#updates' class='toc-link'>Updates</a>
+    <a href='#downloads' class='toc-link'>Downloads</a>
+</aside>
+    </div>
+        <script>
+        fetch('https://api.github.com/repos/kainotch/Wammy/releases/latest')
+            .then(r => r.json())
+            .then(data => {
+                document.querySelectorAll('.nav-version').forEach(el => {
+                    if (data.tag_name) el.textContent = data.tag_name;
+                });
+                
+                const relName = document.getElementById('release-name');
+                const relDate = document.getElementById('release-date');
+                if (relName && data.tag_name) relName.textContent = 'Wammy ' + data.tag_name;
+                if (relDate && data.published_at) {
+                    const d = new Date(data.published_at);
+                    relDate.textContent = 'Released ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                }
+
+                const changelogVersion = document.getElementById('changelog-version');
+                const changelogBody = document.getElementById('changelog-body');
+                if (changelogVersion && data.tag_name) changelogVersion.textContent = data.tag_name;
+                if (changelogBody && data.body) {
+                    let html = data.body.replace(/\r\n/g, '<br>');
+                    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+                    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+                    html = html.replace(/^\* (.*$)/gim, '<ul><li>$1</li></ul>');
+                    html = html.replace(/<\/ul><br><ul>/gim, '<br>');
+                    changelogBody.innerHTML = html;
+                }
+            })
+            .catch(() => {});
+    </script>
+</body>
+</html>

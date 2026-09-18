@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Getting Started — Wammy</title>
+    <link rel='icon' type='image/jpeg' href='../assets/wammy-logo.jpg'>
+    <link rel='stylesheet' href='../assets/style.css'>
+</head>
+<body>
+        <!-- Top Nav -->
+    <nav class='top-nav'>
+        <div class='nav-container'>
+            <a href='../index.html' class='nav-brand'>
+                <img src='../assets/wammy-logo.jpg' alt='Wammy'>
+                <span>Wammy</span>
+            </a>
+            <div class='nav-links'>
+                <a href='../download.html' class='nav-link nav-version-btn'>Get <span class='nav-version'>latest</span></a>
+                <a href='../docs/' class='nav-link'>Docs</a>
+                <a href='https://github.com/kainotch/Wammy' class='nav-link' target='_blank'>GitHub</a>
+            </div>
+        </div>
+    </nav>
+    <div class='docs-layout'>
+            <!-- Left Sidebar -->
+    <aside class='sidebar'>
+        <div class='sidebar-section'>
+            <a href='../download.html' class='sidebar-link '>Download</a>
+            <a href='https://github.com/kainotch/Wammy/releases' class='sidebar-link' target='_blank'>Changelogs</a>
+        </div>
+        <div class='sidebar-section'>
+            <div class='sidebar-section-title'>FAQ</div>
+            <a href='../docs/faq.html' class='sidebar-link '>General</a>
+        </div>
+        <div class='sidebar-section'>
+            <div class='sidebar-section-title'>Guides</div>
+            <a href='../docs/getting-started.html' class='sidebar-link active'>Getting started</a>
+            <a href='../docs/extensions.html' class='sidebar-link '>Extensions & Plugins</a>
+            <a href='../docs/tracking.html' class='sidebar-link '>Tracking</a>
+            <a href='../docs/reader-settings.html' class='sidebar-link '>Reader settings</a>
+            <a href='../docs/local-source.html' class='sidebar-link '>Local source</a>
+        </div>
+    </aside>
+        <main class='docs-content'>
+            <h1>Getting Started</h1>
+<p class='subtitle'>Essential information to help you get set up with Wammy.</p>
+<h2 id='installation'>Installation guide</h2>
+<h3 id='downloading'>Downloading Wammy</h3>
+<ol>
+    <li>Visit our <a href='../download.html'>download page</a> to get the latest version of Wammy.</li>
+    <li>After the download is complete, open the <code>.apk</code> file.</li>
+    <li>Proceed with the installation process.</li>
+</ol>
+<h2 id='adding-sources'>Adding sources</h2>
+<p>Once Wammy is installed on your device, you can bring your own content to read from various sources:</p>
+<div class='tabs'>
+    <div class='tab active'>Local source</div>
+    <div class='tab'>External repositories</div>
+    <div class='tab'>Manual extensions</div>
+</div>
+<div class='info-box info'>
+    <p>Read content stored locally on your device.</p>
+    <p>See the <a href='local-source.html'>Local source guide</a> for instructions.</p>
+</div>
+<h2 id='adding-series'>Adding series to your library</h2>
+<p>After installing the desired extension, you'll find it in the Sources tab.</p>
+<p>Here's how you can add series to your library:</p>
+<ol>
+    <li>Open the <strong>Browse</strong> tab</li>
+    <li>Find your installed source</li>
+    <li>Tap to browse or use the search icon</li>
+    <li>Tap on a series</li>
+    <li>Tap <strong>Add to Library</strong></li>
+</ol>
+        </main>
+        <aside class='toc'>
+    <div class='toc-title'>On this page</div>
+    <a href='#installation' class='toc-link'>Installation guide</a>
+    <a href='#downloading' class='toc-link indent'>Downloading Wammy</a>
+    <a href='#adding-sources' class='toc-link'>Adding sources</a>
+    <a href='#adding-series' class='toc-link'>Adding series to your library</a>
+</aside>
+    </div>
+        <script>
+        fetch('https://api.github.com/repos/kainotch/Wammy/releases/latest')
+            .then(r => r.json())
+            .then(data => {
+                document.querySelectorAll('.nav-version').forEach(el => {
+                    if (data.tag_name) el.textContent = data.tag_name;
+                });
+                
+                const relName = document.getElementById('release-name');
+                const relDate = document.getElementById('release-date');
+                if (relName && data.tag_name) relName.textContent = 'Wammy ' + data.tag_name;
+                if (relDate && data.published_at) {
+                    const d = new Date(data.published_at);
+                    relDate.textContent = 'Released ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                }
+
+                const changelogVersion = document.getElementById('changelog-version');
+                const changelogBody = document.getElementById('changelog-body');
+                if (changelogVersion && data.tag_name) changelogVersion.textContent = data.tag_name;
+                if (changelogBody && data.body) {
+                    let html = data.body.replace(/\r\n/g, '<br>');
+                    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+                    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+                    html = html.replace(/^\* (.*$)/gim, '<ul><li>$1</li></ul>');
+                    html = html.replace(/<\/ul><br><ul>/gim, '<br>');
+                    changelogBody.innerHTML = html;
+                }
+            })
+            .catch(() => {});
+    </script>
+</body>
+</html>
