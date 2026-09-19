@@ -386,7 +386,7 @@ a:hover { color: var(--accent-hover); }
     flex: 1;
     margin-left: var(--sidebar-width);
     margin-right: var(--toc-width);
-    padding: 40px 48px;
+    padding: 56px 80px;
     max-width: calc(100% - var(--sidebar-width) - var(--toc-width));
 }
 
